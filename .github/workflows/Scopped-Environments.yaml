@@ -33,7 +33,7 @@ jobs:
         run: |
               echo "WORKFLOW_VARIABLE == ${WORKFLOW_ENV}"
               echo "JOB_VARIABLE == ${JOB_ENV : -UNSET}"
-              echo "STEP_VARIABLE == ${STEP_ENV : -UNSET}
+              echo "STEP_VARIABLE == ${STEP_ENV : -UNSET}"
                
 
 
