@@ -15,7 +15,7 @@ jobs:
       - name: JOB 1 STEP 1
         env: 
           STEP_ENV: I_AM_STEP_SCOPE_ENVIRONMENT_VARIABLE
-        run: !
+        run: |
               echo "WORKFLOW_VARIABLE == ${WORKFLOW_ENV}"
               echo "JOB_VARIABLE == ${JOB_ENV}"
               echo "STEP_VARIABLE == ${STEP_ENV}"
