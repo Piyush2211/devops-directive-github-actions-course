@@ -1,0 +1,33 @@
+name: variable-share
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  Producer:
+    outputs:
+      genrated_output_variable : ${steps.variable-gen.outputs.genrated-variable}
+      
+    runs-on: ubuntu-24.04 
+    steps:
+      - name: variable-genrator-step
+        id: variable-gen
+        
+        run: |
+          genrated-variable "this is the genrated variable to pass"
+          echo " genrated-variable : ${genrated-variable}" >>  $GITHUB_OUTPUT "
+          echo " GENRATED-VARIABLE : ${genrated-variable}" >> $GITHUB_ENV "
+      - name: job-variable-check-step
+        run: |
+         echo "genrated-variable via ENV :  $GENRATED-VARIABLE"
+         echo "genrated-variable: ${steps.variable-gen.outputs.genrated-variable}"    
+
+  consumer:
+    needs: Producer
+    runs-on: ubuntu-24.04
+    steps:
+      - name: variable usage step
+        run: |
+         echo "the variable from outputs : ${needs.Producer.outputs.genrated-variable}"
+         echo " this is the steps enviroments variable : ${GENRATED-VARIABLE:-<UNSET>}" 
+    
